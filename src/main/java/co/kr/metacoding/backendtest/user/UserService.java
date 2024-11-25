@@ -17,7 +17,14 @@ public class UserService {
     }
 
     public UserResponse.GetDTO getUser(Integer id) {
-        User user=userRepository.findById(id);
+        User user = userRepository.findById(id);
         return new UserResponse.GetDTO(user);
+    }
+
+    @Transactional
+    public UserResponse.UpdateDTO updateUser(Integer id, UserRequest.UpdateDTO updateDTO) {
+        User user = userRepository.findById(id);
+        user.setName(updateDTO.getName());
+        return new UserResponse.UpdateDTO(user);
     }
 }
