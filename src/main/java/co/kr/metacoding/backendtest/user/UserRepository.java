@@ -4,6 +4,8 @@ import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Repository
 public class UserRepository {
@@ -13,7 +15,7 @@ public class UserRepository {
         entityManager.persist(user);
     }
 
-    public User findById(Integer id) {
-        return entityManager.find(User.class, id);
+    public Optional<User> findById(Integer id) {
+        return Optional.ofNullable(entityManager.find(User.class, id));
     }
 }

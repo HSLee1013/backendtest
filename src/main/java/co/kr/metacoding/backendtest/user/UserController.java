@@ -1,6 +1,8 @@
 package co.kr.metacoding.backendtest.user;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -9,7 +11,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/users")
-    public UserResponse.SaveDTO saveUser(@RequestBody UserRequest.SaveDTO saveDTO) {
+    public UserResponse.SaveDTO saveUser(@Valid @RequestBody UserRequest.SaveDTO saveDTO, Errors errors) {
         return userService.saveUser(saveDTO);
     }
 
@@ -19,7 +21,7 @@ public class UserController {
     }
 
     @PutMapping("/users/{id}")
-    public UserResponse.UpdateDTO updateUser(@PathVariable Integer id, @RequestBody UserRequest.UpdateDTO updateDTO) {
+    public UserResponse.UpdateDTO updateUser(@PathVariable Integer id, @Valid @RequestBody UserRequest.UpdateDTO updateDTO, Errors errors) {
         return userService.updateUser(id, updateDTO);
     }
 }
