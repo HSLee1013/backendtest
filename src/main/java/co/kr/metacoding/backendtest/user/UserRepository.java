@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 public class UserRepository {
     private final EntityManager entityManager;
 
+    public void insert(User user) {
+        entityManager.persist(user);
+    }
 }

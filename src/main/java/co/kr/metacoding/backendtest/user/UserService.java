@@ -9,4 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
     private final UserRepository userRepository;
 
+    @Transactional
+    public UserResponse.SaveDTO saveUser(UserRequest.SaveDTO saveDTO) {
+        User user = saveDTO.toEntity();
+        userRepository.insert(user);
+        return new UserResponse.SaveDTO(user);
+    }
 }
